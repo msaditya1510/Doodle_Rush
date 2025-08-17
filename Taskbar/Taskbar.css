@@ -1,0 +1,30 @@
+nav {
+  background-color: #242321;
+  height: 60px;
+  width: 100%;
+}
+nav ul {
+  float: right;
+  margin-right: 20px;
+}
+nav ul a {
+  display: inline-flex;
+  line-height: 60px;
+  margin: 0 5px;
+}
+nav a button {
+  background-color: #f6f4f3c7;
+  color: #000;
+  box-sizing: content-box;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #ff85d0;
+  box-shadow: 5px 5px 5px#333;
+  color: rgb(243, 241, 242);
+}
