@@ -1,0 +1,5 @@
+package com.rush.doodle.exceptions;
+
+public class DuplicateRoomException {
+
+}

@@ -1,0 +1,30 @@
+package com.rush.doodle.room;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.rush.doodle.player.Player;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+@Entity
+public class Room {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long roomId;
+	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Player> players = new ArrayList<>();
+	public Room(){
+		
+	}
+	public String toString() {
+		return "RoomId: "+roomId;
+	}
+	public Long getRoomId() {
+		return roomId;
+	}
+}

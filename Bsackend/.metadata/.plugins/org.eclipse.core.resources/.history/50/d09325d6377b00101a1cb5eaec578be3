@@ -1,0 +1,16 @@
+package com.rush.doodle.chat;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Chat {
+	private String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+}

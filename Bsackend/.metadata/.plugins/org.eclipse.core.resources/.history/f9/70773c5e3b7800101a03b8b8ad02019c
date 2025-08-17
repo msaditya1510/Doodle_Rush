@@ -1,0 +1,6 @@
+package com.rush.doodle.exceptions;
+
+@SuppressWarnings("serial")
+public class DuplicateRoomException extends RuntimeException {
+
+}

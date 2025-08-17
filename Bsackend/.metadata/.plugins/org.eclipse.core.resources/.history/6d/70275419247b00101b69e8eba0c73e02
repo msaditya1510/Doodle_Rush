@@ -1,0 +1,10 @@
+package com.rush.doodle.chat;
+
+public class ChatService {
+
+	public void addMessage(String message,String word) {
+		if()
+		
+	}
+
+}

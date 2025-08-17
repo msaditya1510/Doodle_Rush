@@ -1,0 +1,46 @@
+package com.rush.doodle.room;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.rush.doodle.player.Player;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+@Entity
+public class Room {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long roomId;
+	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Player> players = new ArrayList<>();
+	public Room(){
+		
+	}
+	public Long getRoomId() {
+		return roomId;
+	}
+	public List<Player> getPlayers(){
+		return players;
+	}
+	public void addPlayer(Player player) {
+		if(players.size()<8) {
+			players.add(player);
+			player.setRoom(this);
+		}
+		else {
+			throw new IllegalStateException("This Room Already has 8 players in it!");
+		}
+	}
+	public void removePlayer(Player player) {
+		players.remove(player);
+		player.setRoom(null);
+	}
+	public String toString() {
+		return "{\nRoomId: "+roomId+"\nPlayers count: "+players.size()+"\n}";
+	}
+}

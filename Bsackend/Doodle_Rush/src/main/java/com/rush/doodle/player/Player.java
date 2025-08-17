@@ -1,0 +1,58 @@
+package com.rush.doodle.player;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.rush.doodle.room.Room;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+@Entity
+public class Player {
+	@ManyToOne
+    @JoinColumn(name = "room_id", nullable = false) // foreign key column in player table
+	@JsonBackReference
+	private Room room;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long playerId;
+	@NotBlank(message="Name cannot be blank!")
+	private String name;
+	private int Score=0;
+	public Player() {
+		
+	}
+	public Player(String name,Room room) {
+		this.name=name;
+		this.room=room;
+	}
+	public void setName(String name) {
+		this.name=name;
+	}
+	public String getName() {
+		return name;
+	}
+	public Long getPlayerId() {
+		return playerId;
+	}
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room=room;
+	}
+	@Override
+    public String toString() {
+        return "Player{id=" + playerId + ", name='" + name + "', roomId=" +
+               (room != null ? room.getRoomId() : null) + "}";
+    }
+	public int getScore() {
+		return Score;
+	}
+	public void setScore(int score) {
+		Score = score;
+	}
+}

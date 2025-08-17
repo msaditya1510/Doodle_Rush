@@ -1,0 +1,70 @@
+package com.rush.doodle.player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.rush.doodle.exceptions.*;
+import com.rush.doodle.room.*;
+
+@Service
+public class PlayerService {
+	@Autowired
+	private PlayerRepository playerRepository;
+	@Autowired
+	private RoomRepository roomRepository;
+	
+	public List<Player> getPlayersInRoom(String roomId) {
+		List<Player> players=new ArrayList<>();
+		Optional<Room> room=roomRepository.findByRoomId(roomId);
+		if(room.isPresent()) {
+			room.get().getPlayers().forEach(players::add);
+			return players;
+		}
+		throw new IllegalStateException("Room Not Found!");
+	}
+
+	public ResponseEntity<?> addPlayer(Player player) {
+		String name=player.getName();
+		//Long id=player.getRoom().getId();
+		String roomId=player.getRoom().getRoomId();
+		Optional<Room> room=roomRepository.findByRoomId(roomId);
+		if(room.isPresent()) {
+			List<Player> players=room.get().getPlayers();
+			boolean val=players.stream().anyMatch(p->p.getName().equalsIgnoreCase(name));
+			if(val) {
+				throw new DuplicateException("Duplicate name is found, try another one!");
+			}
+			else {
+				room.get().addPlayer(player);
+				playerRepository.save(player);
+				return ResponseEntity.status(HttpStatus.OK).body("Player: "+player.getName()+" added successfully!");
+			}
+		}
+		else {
+			throw new NotFoundException("No room found with room ID: "+roomId);
+		}
+	}
+
+	public ResponseEntity<?> deletePlayer(String name) {
+			Optional<Player> player =playerRepository.findByName(name);
+			if(player.isPresent()) {
+				Room room=player.get().getRoom();
+				room.removePlayer(player.get());
+				playerRepository.deleteById(player.get().getPlayerId());
+				return ResponseEntity.status(HttpStatus.OK).body("Player has been deleted successfully!");
+		}
+		throw new NotFoundException("No Player Found with name: "+name+" !");
+	}
+
+	public void updatePlayerScore(int time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

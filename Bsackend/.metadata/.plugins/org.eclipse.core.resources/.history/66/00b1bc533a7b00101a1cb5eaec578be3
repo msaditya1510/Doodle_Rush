@@ -1,0 +1,38 @@
+package com.rush.doodle.room;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/rooms")
+public class RoomController {
+	@Autowired
+	private RoomService roomService;
+	@GetMapping()
+	public List<Room> getAllRooms() {
+		return roomService.getAllRooms();
+	}
+	@GetMapping("/{roomId}")
+	public ResponseEntity<?> getRoom(@PathVariable Long roomId) {
+		return roomService.getRoom(roomId);
+	}
+	// TO CREATE A NEW ROOM
+	@PostMapping
+	public ResponseEntity<?> createRoom() {
+		return roomService.createRoom();
+	}
+	@DeleteMapping("/{roomId}")
+	public ResponseEntity<?> deleteRoom(@PathVariable Long roomId) {
+		return roomService.deleteRoom(roomId);
+		
+	}
+	
+}

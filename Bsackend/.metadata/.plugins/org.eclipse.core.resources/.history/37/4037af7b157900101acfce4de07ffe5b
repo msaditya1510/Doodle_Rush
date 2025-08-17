@@ -1,0 +1,33 @@
+package com.rush.doodle.player;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class PlayerService {
+
+	public void getAllPlayers() {
+		
+		
+	}
+
+	public void getPlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addPlayer(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updatePlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deletePlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

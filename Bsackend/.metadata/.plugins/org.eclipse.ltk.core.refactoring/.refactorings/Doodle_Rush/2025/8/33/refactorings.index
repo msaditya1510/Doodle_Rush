@@ -1,0 +1,8 @@
+1755083765068	Encapsulate field 'password, ...'
+1755083882917	Rename type 'RoomBusinessClass'
+1755163394174	Rename package 'com.rush.doodle.landing_page'
+1755163473042	Rename type 'player'
+1755179377412	Copy compilation unit
+1755180260960	Rename type 'PlayerNotFoundException'
+1755180286467	Delete element
+1755183000725	Rename type 'DuplicateRoomException'

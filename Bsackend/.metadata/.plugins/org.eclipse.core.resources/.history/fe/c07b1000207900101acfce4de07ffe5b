@@ -1,0 +1,11 @@
+package com.rush.doodle.player;
+
+import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface PlayerRepository extends CrudRepository<Player,Long> {
+	public Optional<Player> findByName(String name);
+
+	public boolean existsByName(String name);
+}

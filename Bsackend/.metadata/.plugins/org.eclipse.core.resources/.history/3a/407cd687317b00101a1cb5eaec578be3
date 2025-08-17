@@ -1,0 +1,16 @@
+package com.rush.doodle.chat;
+
+import org.springframework.http.ResponseEntity;
+
+public class ChatService {
+
+	public ResponseEntity<?> addMessage(String message,String word) {
+		if(message.equalsIgnoreCase(word)) {
+			return ResponseEntity.ok("Player: "+ "playerName"+ "Guessed the word!");
+		}
+		else {
+			return ResponseEntity.ok("PlayerName"+" : "+message);
+		}
+	}
+
+}

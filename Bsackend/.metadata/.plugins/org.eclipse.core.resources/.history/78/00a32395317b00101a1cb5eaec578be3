@@ -1,0 +1,20 @@
+package com.rush.doodle.chat;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
+import com.rush.doodle.player.PlayerService;
+
+public class ChatService {
+	@Autowired
+	private PlayerService playerService;
+	public ResponseEntity<?> addMessage(String message,String word) {
+		if(message.equalsIgnoreCase(word)) {
+			
+			return ResponseEntity.ok("Player: "+ "playerName"+ "Guessed the word!");
+		}
+		else {
+			return ResponseEntity.ok("PlayerName"+" : "+message);
+		}
+	}
+}

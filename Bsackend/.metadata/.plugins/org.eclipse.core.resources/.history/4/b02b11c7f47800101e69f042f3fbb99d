@@ -1,0 +1,15 @@
+package com.rush.doodle.player;
+
+public class Player {
+	private String name;
+	private Long roomId;
+	public void setName(String name) {
+		this.name=name;
+	}
+	public String getName() {
+		return name;
+	}
+	public Long getRoomId() {
+		return roomId;
+	}
+}

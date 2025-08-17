@@ -1,0 +1,52 @@
+package com.rush.doodle.player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.rush.doodle.exceptions.*;
+
+@Service
+public class PlayerService {
+	@Autowired
+	private PlayerRepository playerRepository;
+	public List<Player> getAllPlayers() {
+		List<Player> players=new ArrayList<>();
+		playerRepository.findAll().forEach(players::add);
+		return players;
+	}
+
+	public ResponseEntity<?> getPlayer(String name) {
+		
+		Optional<Player> player=playerRepository.findByName(name);
+		if(player.isPresent())
+		return ResponseEntity.status(HttpStatus.OK).body("Player "+player);
+		}
+		throw new NotFoundException("No Player Found with name "+name);
+	}
+
+	public ResponseEntity<?> addPlayer(Player player) {
+		String name=player.getName();
+		if(playerRepository.existsByName(name)) {
+			throw new DuplicateException("A Player with duplicate name is found!");
+		}
+		playerRepository.save(player);
+		return ResponseEntity.status(HttpStatus.OK).body("Player: "+player.getName()+" added successfully!");
+	}
+
+	public ResponseEntity<?> deletePlayer(String name) {
+		boolean val=playerRepository.existsByName(name);
+		if(val) {
+			Long id=playerRepository.findIdByName();
+			playerRepository.deleteById(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Player has been deleted successfully!");
+		}
+		throw new NotFoundException("No Player Found with name: "+name+" !");
+	}
+
+}

@@ -1,0 +1,37 @@
+package com.rush.doodle.player;
+
+import com.rush.doodle.room.Room;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+@Entity
+public class Player {
+	@ManyToOne
+    @JoinColumn(name = "room_id", nullable = false) // foreign key column in player table
+	private Room room;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long playerId;
+	@NotBlank(message="Name cannot be blank!")
+	private String name;
+	public void setName(String name) {
+		this.name=name;
+	}
+	public String getName() {
+		return name;
+	}
+	public Long getPlayerId() {
+		return playerId;
+	}
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room=room;
+	}
+}

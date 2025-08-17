@@ -1,0 +1,45 @@
+package com.rush.doodle.player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rush.doodle.exceptions.PlayerNotFoundException;
+
+@Service
+public class PlayerService {
+	@Autowired
+	private PlayerRepository playerRepository;
+	public void getAllPlayers() {
+		List<Player> players=new ArrayList<>();
+		playerRepository.findAll().forEach(players::add);
+	}
+
+	public void getPlayer(String name) {
+		boolean val=playerRepository.existsByName(name);
+		if(val) {
+		long id=playerRepository.findIdByName();
+		Optional<Player> player=playerRepository.findById(id);
+		}
+		throw new PlayerNotFoundException("No Player Found with name "+name);
+	}
+
+	public void addPlayer(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updatePlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deletePlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

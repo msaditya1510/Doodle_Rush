@@ -1,0 +1,5 @@
+package com.rush.doodle.chat;
+
+public class ChatService {
+
+}

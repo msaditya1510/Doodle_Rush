@@ -1,0 +1,53 @@
+package com.rush.doodle.landing_page;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.rush.doodle.exceptions.*;
+
+@Service
+public class RoomService {
+	@Autowired
+	private RoomRepository roomRepository;
+	public List<Room>getAllRooms() {
+		List<Room> rooms=new ArrayList<>();
+		roomRepository.findAll().forEach(rooms::add);
+		return rooms;
+	}
+
+	public ResponseEntity<?> getRoom(Long roomId) {
+		boolean val=roomRepository.existsById(roomId);
+		
+		if(val) {
+			Optional<Room> room=roomRepository.findById(roomId);
+			roomRepository.deleteById(roomId);
+			return ResponseEntity.status(HttpStatus.OK).body("Room Details: "+room);
+		}
+		throw new RoomNotFoundException("No Room found with room id: "+roomId+"\n Try again!");
+	}
+
+	public ResponseEntity<?> createRoom(Room room) {
+		Long roomId=room.getRoomId();
+		if(roomRepository.existsById(roomId)) {
+			throw new DuplicateRoomException("Room Id-"+roomId+" already exists try another one!");
+		}
+		roomRepository.save(room);
+		return ResponseEntity.status(HttpStatus.CREATED).body("A Room has been created with Room Id: "+roomId);
+	}
+
+	public ResponseEntity<?> deleteRoom(Long roomId) {
+		boolean val=roomRepository.existsById(roomId);
+		if(val) {
+		roomRepository.deleteById(roomId);
+		return ResponseEntity.status(HttpStatus.OK).body("Room has been deleted successfully!");
+		}
+		throw new RoomNotFoundException("No Room found with room id: "+roomId);
+	}
+
+}

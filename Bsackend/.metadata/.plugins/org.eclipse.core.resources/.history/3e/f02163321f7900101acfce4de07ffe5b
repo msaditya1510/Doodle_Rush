@@ -1,0 +1,36 @@
+package com.rush.doodle.player;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PlayerController {
+	@Autowired
+	private PlayerService playerService;
+	@GetMapping()
+	public void getAllPlayers(){
+		playerService.getAllPlayers();
+	}
+	@GetMapping("/{name}")
+	public void getPlayer(@PathVariable String name) {
+		playerService.getPlayer(name);
+	}
+	@PostMapping
+	public void addPlayer(@RequestBody Player player) {
+		playerService.addPlayer(player);
+	}
+	@PutMapping("/{name}")
+	public void updatePlayer(@PathVariable String name) {
+		playerService.updatePlayer(name);
+	}
+	@DeleteMapping("/{name}")
+	public void deletePlayer(@PathVariable String name) {
+		playerService.deletePlayer(name);
+	}
+}

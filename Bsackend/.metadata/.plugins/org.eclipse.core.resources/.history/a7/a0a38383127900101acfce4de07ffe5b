@@ -1,0 +1,23 @@
+package com.rush.doodle.player;
+
+import com.rush.doodle.room.Room;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+@Entity
+public class Player {
+	@ManyToOne
+	private Room room;
+	private Long id;
+	private String name;
+	public void setName(String name) {
+		this.name=name;
+	}
+	public String getName() {
+		return name;
+	}
+	public Long getId() {
+		return id;
+	}
+}

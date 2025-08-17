@@ -1,0 +1,52 @@
+package com.rush.doodle.player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.rush.doodle.exceptions.*;
+
+@Service
+public class PlayerService {
+	@Autowired
+	private PlayerRepository playerRepository;
+	public ResponseEntity<?> getAllPlayers() {
+		List<Player> players=new ArrayList<>();
+		playerRepository.findAll().forEach(players::add);
+		return ResponseEntity.status(HttpStatus.OK).body("");
+	}
+
+	public ResponseEntity<?> getPlayer(String name) {
+		boolean val=playerRepository.existsByName(name);
+		if(val) {
+		long id=playerRepository.findIdByName();
+		Optional<Player> player=playerRepository.findById(id);
+		return ResponseEntity.status(HttpStatus.OK).body("Player "+player);
+		}
+		throw new NotFoundException("No Player Found with name "+name);
+	}
+
+	public void addPlayer(Player player) {
+		String name=player.getName();
+		if(playerRepository.existsByName(name)) {
+			throw new DuplicateException("A Player with duplicate name is found!");
+		}
+		
+	}
+
+	public void updatePlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deletePlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

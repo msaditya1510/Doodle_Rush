@@ -1,0 +1,10 @@
+package com.rush.doodle.landing_page;
+
+public class RoomService {
+
+	public void getAllRooms() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
