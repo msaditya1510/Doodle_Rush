@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>BrushRush</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="\Login page\popup.css" />
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <a href="#about"><button>About</button></a>
+            <a href="#guide"><button>Guide</button></a>
+            <a href="#developers"><button>Developers</button></a>
+            <a href="#help"><button>Help</button></a>
+        </ul>
+    </nav>
+    <header>
+        <label class="Header">Doodle <span>Rush</span></label>
+    </header>
+
+    <main class="home-main">
+        <div class="subhead">
+            <h2>Get-Set • Draw • Win</h2>
+        </div>
+        <div class="button-grid">
+            <img src="img3.png" style="height:50%"/><br>
+            <button onclick="showCreateRoom()">Create Room</button><br />
+            <button onclick="showJoinRoom()">Join Room</button>
+        </div>
+
+        <!-- Create Room Popup -->
+        <!-- <div id="create-popup" class="popup"> 
+            <img src="img3.png" height="40%" > 
+            <h3>Your Room ID</h3>
+            <p id="generated-id">#XXXXXX</p>
+            <button onclick="closePopup()">Close</button>
+        </div> -->
+
+        <!-- Join Room Popup -->
+        <!-- <div id="join-popup" class="popup">
+            <h3>Join Private Room</h3>
+            <input type="text" id="join-room-id" placeholder="Enter Room ID" />
+            <button onclick="joinGameRoom()">Join</button>
+            <button onclick="closePopup()">Close</button>
+        </div> -->
+
+        
+        <!-- Create Room Popup -->
+        <div id="create-popup" class="popup">
+            <div class="panda">
+                <div class="ear"></div>
+                <div class="face">
+                    <div class="eye-shade"></div>
+                    <div class="eye-white">
+                        <div class="eye-ball"></div>
+                    </div>
+                    <div class="eye-shade rgt"></div>
+                    <div class="eye-white rgt">
+                        <div class="eye-ball"></div>
+                    </div>
+                    <div class="nose"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="foot">
+                    <div class="finger"></div>
+                </div>
+                <div class="foot rgt">
+                    <div class="finger"></div>
+                </div>
+            </div>
+
+            <form>
+                <div class="hand"></div>
+                <div class="hand rgt"></div>
+
+                <h2>Room Created!</h2>
+                <br>
+                <p>Your Room ID: <span id="generated-id"></span></p>
+                <br><br>
+                <input type="text" id="create-username" placeholder="Enter your name">
+                <br>
+                <button type="button" onclick="enterGameRoom()">Enter Game</button>
+                <br>
+                <button onclick="closePopup()">Close</button>
+            </form>
+        </div>
+
+        <!-- Join Room Popup -->
+        <div id="join-popup" class="popup">
+            <div class="panda">
+                <div class="ear"></div>
+                <div class="face">
+                    <div class="eye-shade"></div>
+                    <div class="eye-white">
+                        <div class="eye-ball"></div>
+                    </div>
+                    <div class="eye-shade rgt"></div>
+                    <div class="eye-white rgt">
+                        <div class="eye-ball"></div>
+                    </div>
+                    <div class="nose"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="foot">
+                    <div class="finger"></div>
+                </div>
+                <div class="foot rgt">
+                    <div class="finger"></div>
+                </div>
+            </div>
+
+            <form>
+                <div class="hand"></div>
+                <div class="hand rgt"></div>
+
+                <h2>Join a Room</h2>
+                <br>
+                <input type="text" id="join-room-id" placeholder="Enter Room ID">
+                <br>
+                <input type="text" id="username" placeholder="Enter your name">
+                <br>
+                <button type="button" onclick="joinGameRoom()">Join Game</button>
+                <br>
+                <button onclick="closePopup()">Close</button>
+            </form>
+        </div>
+
+        <!-- Info Sections -->
+        <div class="container">
+            <div id="about" class="scroll-card">
+                <h2>About the Game</h2>
+                <p>
+                This game lets you test your knowledge in multiplayer battles
+                with friends or random players.
+              </p>
+              <p>
+                Play quiz tournaments, unlock ranks, and climb the leaderboard.
+                Engage in topic-based challenges
+              </p>
+              <p>
+                like General Knowledge, Technology, Anime, Cricket, Coding, and
+                more.
+              </p>
+              <p>Make your own custom rooms or join public rooms!</p>
+            </div>
+            <div id="guide" class="scroll-card">
+                <h2>How to Play</h2>
+                <p>Guess the word based on the drawing of the other player</p>
+                <p>- Type your answer within time-limit</p>
+                <p>- Each correct guess earns points</p>
+                <p>- Bug fixes and performance boost</p>
+            </div>
+            <div id="developers" class="scroll-card">
+                <h2>Developers</h2>
+                <p>Made with ❤️ by awesome devs!</p>
+            </div>
+            <div id="help" class="scroll-card">
+                <h2>Need Help?</h2>
+                <p>Email: <strong>support@gmail.com</strong></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Doodle Rush. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
