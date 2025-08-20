@@ -5,7 +5,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
-  background: url("images/img.png") center/cover no-repeat;
+  background: url("../images/img.png") center/cover no-repeat;
 }
 
 /* Header */
