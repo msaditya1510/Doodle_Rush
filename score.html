@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Scoreboard</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #1e1e1e;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .scoreboard {
+        width: 400px;
+        background: #2a2a2a;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .scoreboard h2 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #ffd700;
+    }
+    .player {
+        display: flex;
+        justify-content: space-between;
+        background: #3a3a3a;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 18px;
+        transition: background 0.3s;
+    }
+    .player:hover {
+        background: #505050;
+    }
+    .name {
+        font-weight: bold;
+    }
+    .score {
+        color: #00ff99;
+    }
+    button {
+        margin-top: 10px;
+        width: 100%;
+        padding: 8px;
+        background: #ff5722;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #e64a19;
+    }
+</style>
+</head>
+<body>
+
+<div class="scoreboard">
+    <h2>🏆 Game Scoreboard</h2>
+    <div id="players"></div>
+    <button onclick="updateScores()">+ Random Points</button>
+</div>
+
+<script>
+    const playersData = [
+        { name: "Player 1:Abhi Raj Gupta", score: 0 },
+        { name: "Player 2:Sanskar ", score: 0 },
+        { name: "Player 3:Anjaney", score: 0 },
+        { name: "Player 4:Shashi", score: 0 },
+        { name: "Player 5:Raj Vardhan", score: 0 },
+        { name: "Player 6:Krishnakant", score: 0 },
+        { name: "Player 7:Abhijeet", score: 0 },
+        { name: "Player 8:Dhiraj", score: 0 }
+    ];
+
+    function renderPlayers() {
+        const container = document.getElementById("players");
+        container.innerHTML = "";
+        playersData.forEach(p => {
+            container.innerHTML += `
+                <div class="player">
+                    <span class="name">${p.name}</span>
+                    <span class="score">${p.score}</span>
+                </div>
+            `;
+        });
+    }
+
+    function updateScores() {
+        playersData.forEach(p => {
+            p.score += Math.floor(Math.random() * 10); // add 0-9 points
+        });
+        renderPlayers();
+    }
+
+    renderPlayers();
+</script>
+
+</body>
+</html>
