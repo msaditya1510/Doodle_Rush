@@ -2,7 +2,6 @@ services:
   - type: web
     name: Backend
     rootDir: Backend
-    runtime: java
     buildCommand: ./mvnw clean install -DskipTests
     startCommand: java -jar target/Doodle-Rush-0.0.1-SNAPSHOT.jar
     envVars:
