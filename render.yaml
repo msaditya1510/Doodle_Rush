@@ -6,9 +6,8 @@ services:
     startCommand: java -jar target/*.jar
     plan: free
 
-  - type: web
+  - type: static_site
     name: front end
-    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
