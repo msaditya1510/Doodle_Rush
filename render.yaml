@@ -10,8 +10,9 @@ services:
         value: 21
     plan: free
 
-  - type: static
+  - type: web
     name: Frontend
+    env: static
     rootDir: Frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
