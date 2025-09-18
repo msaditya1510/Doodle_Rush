@@ -2,7 +2,7 @@ services:
   - type: web
     name: backend
     env: java
-    rootDir: backend
+    rootDir: Backend
     buildCommand: ./mvnw clean install -DskipTests
     startCommand: java -jar target/*.jar
     plan: free
@@ -10,7 +10,7 @@ services:
   - type: web
     name: frontend
     env: static
-    rootDir: frontend
+    rootDir: Frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     plan: free
