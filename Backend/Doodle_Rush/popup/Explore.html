@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore section</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url("/Landing page/img.png") center/cover no-repeat;
+      }
+      header {
+        background-color: #000000c9;
+        text-align: center;
+        height: 20vh;
+        font-size:x-large;
+        padding: 20px;
+        color: #ffea00;
+        text-shadow: 0 0 4px #ffea00, 0 0 20px #ffae00, 0 0 30px #ff7200;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        padding: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      
+      .scroll-card {
+        color:white ;
+        background: rgba(0, 0, 0, 0.315);
+        margin: 5vh;
+        padding: 20px;
+        height: 40vh;
+        width: 50%;
+        scrollbar-color: rgb(78, 54, 54);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+        box-shadow: 3px 3px 10px rgba(14, 4, 4, 0.502);
+      }
+      .scroll-card p {
+        font-family: "Times New Roman", Times, serif;
+        font-size: large;
+        font-weight: 300;
+      }
+      .scroll-card h2 {
+        font-size: xx-large;
+        color: rgb(253, 10, 10);
+        text-shadow: 2px 2px 2px black;
+      }
+      .scroll-card::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .scroll-card::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Explore Section</h1>
+    </header>
+    <div class="container">
+      <div id="about" class="scroll-card">
+        <h2>About the Game</h2>
+        <p>
+          This game lets you test your knowledge in multiplayer battles with
+          friends or random players.
+        </p>
+        <p>
+          Play quiz tournaments, unlock ranks, and climb the leaderboard. Engage
+          in topic-based challenges
+        </p>
+        <p>
+          like General Knowledge, Technology, Anime, Cricket, Coding, and more.
+        </p>
+        <p>Make your own custom rooms or join public rooms!</p>
+      </div>
+      <div id="guide" class="scroll-card">
+        <h2>How to Play</h2>
+        <p>Guess the word based on the drawing of the other player</p>
+        <p>- Type your answer within time-limit</p>
+        <p>- Each correct guess earns points</p>
+        <p>- Bug fixes and performance boost</p>
+      </div>
+      <div id="developers" class="scroll-card">
+        <h2>Developers</h2>
+        <p>Made with ❤️ by awesome devs!</p>
+      </div>
+      <div id="help" class="scroll-card">
+        <h2>Need Help?</h2>
+        <p>Email: <strong>support@gmail.com</strong></p>
+      </div>
+    </div>
+  </body>
+</html>

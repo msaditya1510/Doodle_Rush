@@ -1,8 +1,0 @@
-package com.rush.doodle.exceptions;
-
-@SuppressWarnings("serial")
-public class DuplicateRoomIdException extends RuntimeException {
-	public DuplicateRoomIdException(String message) {
-		super(message);
-	}
-}

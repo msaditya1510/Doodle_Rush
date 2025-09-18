@@ -1,8 +1,0 @@
-package com.rush.doodle.exceptions;
-
-@SuppressWarnings("serial")
-public class PlayerNotFoundException extends RuntimeException{
-	public PlayerNotFoundException(String message) {
-		super(message);
-	}
-}
