@@ -1,7 +1,6 @@
 services:
   - type: web
     name: backend
-    env: java
     rootDir: Backend
     buildCommand: ./mvnw clean install -DskipTests
     startCommand: java -jar target/*.jar
