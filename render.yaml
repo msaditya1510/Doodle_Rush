@@ -1,13 +1,13 @@
 services:
   - type: web
-    name: backend
+    name: Backend
     rootDir: Backend
     buildCommand: ./mvnw clean install -DskipTests
-    startCommand: java -jar target/*.jar
+    startCommand: java -jar target/Doodle-Rush-0.0.1-SNAPSHOT.jar
     plan: free
 
   - type: web
-    name: frontend
+    name: Frontend
     env: static
     rootDir: Frontend
     buildCommand: npm install && npm run build
