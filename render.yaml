@@ -8,11 +8,3 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
-
-  - type: web
-    name: Frontend
-    env: static
-    rootDir: Frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    plan: free
