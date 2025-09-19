@@ -11,19 +11,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class DoodleRushApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DoodleRushApplication.class, args);
-	}
-	 @Bean
-	     WebMvcConfigurer corsConfigurer() {
-	        return new WebMvcConfigurer() {
-	            @Override
-	            public void addCorsMappings(CorsRegistry registry) {
-	                registry.addMapping("/api/**")
-	                        .allowedOrigins("https://doodle-rush.vercel.app/","https://doodle-rush.vercel.app","http://localhost:5173")
-	                        .allowedMethods("*");
-	            }
-	        };
+    public static void main(String[] args) {
+        SpringApplication.run(DoodleRushApplication.class, args);
+    }
 
-	 }
+    @Bean
+    WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")  // ✅ Change this to /** to allow ALL endpoints
+                        .allowedOrigins(
+                            "https://doodle-rush.vercel.app",
+                            "https://doodle-rush.vercel.app/",
+                            "http://localhost:5173"
+                        )
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);  // ✅ Add this for cookies/auth
+            }
+        };
+    }
 }
