@@ -85,7 +85,7 @@ function UI({
 
 
   const handleStartGame = () => {
-    fetch(`http://localhost:8080/game/startGame/${roomId}/${playerName}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/game/startGame/${roomId}/${playerName}`, {
       method: "POST",
     })
       .then((res) => res.text())
@@ -101,7 +101,7 @@ function UI({
   };
 
   const handleStartRound = () => {
-    fetch(`http://localhost:8080/game/startRound/${roomId}/${playerName}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/game/startRound/${roomId}/${playerName}`, {
       method: "POST",
     })
       .then((res) => {

@@ -7,7 +7,7 @@ const LeaderBoardPage = () => {
   // Fetch and animate leaderboard
   useEffect(() => {
     const roomId = localStorage.getItem("roomId");
-    fetch(`http://localhost:8080/game/leaderboard/${roomId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/game/leaderboard/${roomId}`)
       .then((r) => r.json())
       .then((data) => {
         // If backend sends a map { "name": score }
