@@ -169,7 +169,10 @@ function HomeButtons() {
   /* ---------- CREATE ROOM FUNCTION ---------- */
   const handleCreateRoom = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/rooms/create`, { method: "POST" });
+      console.log('1 reached')
+     const res = await fetch(`${import.meta.env.VITE_API_URL}/rooms/create`, { method: "POST" });
+      // const res = await fetch(`http://localhost:8080/rooms/create`, { method: "POST" });
+      console.log('reached 2')
       const newRoomId = await res.text();
       setCreatedRoomId(newRoomId);
       setShowCreate(true);
@@ -188,6 +191,7 @@ function HomeButtons() {
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/rooms/join`, {
+      // const res = await fetch(`http://localhost:8080/players/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ playerName, roomId }),
@@ -263,6 +267,7 @@ function HomeButtons() {
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/players/join`, {
+      // const res = await fetch(`http://localhost:8080/players/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ playerName, roomId }),

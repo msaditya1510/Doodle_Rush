@@ -120,7 +120,7 @@ public class GameService {
 	        return "Correct! Player " + playerId + " guessed the word.";
 	    }
 	    else {
-	    	chatMessage.setAll(player.getName()+": "+guess,player.getName(),ChatType.CHAT);
+	    	chatMessage.setAll(guess,player.getName(),ChatType.CHAT);
 	    	messagingTemplate.convertAndSend("/topic/room/"+roomId,chatMessage);
 	    	return "Incorrect guess!";
 	    }

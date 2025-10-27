@@ -49,9 +49,10 @@ function GamePage() {
       setConnected(true);
       console.log(`✅ Connected as ${playerName} in room ${roomId}`);
 
-      client.subscribe(`/topic/room/${roomId}`, (message) => {
+ client.subscribe(`/topic/room/${roomId}`, (message) => {
   const msg = JSON.parse(message.body);
-  
+  console.log("📨 Received message:", msg); // Debug log
+
   // Handle SCORE_UPDATE messages
   if (msg.type === "SCORE_UPDATE") {
     try {
@@ -61,7 +62,15 @@ function GamePage() {
     } catch (e) {
       console.error("Failed to parse leaderboard update", e);
     }
-    return; // Don't process this as a chat message
+    return;
+  }
+
+  // Handle TIME_UPDATE messages
+  if (msg.type === "SYSTEM" && typeof msg.content === "string" && msg.content.startsWith("TIME_UPDATE:")) {
+    const time = parseInt(msg.content.split(":")[1], 10);
+    setTimeLeft(time);
+    setTimerActive(time > 0);
+    return;
   }
 
   // Handle private messages (for drawer word)
@@ -78,7 +87,7 @@ function GamePage() {
     return;
   }
 
-  // Handle SYSTEM messages
+  // Handle SYSTEM messages for game flow
   if (msg.type === "SYSTEM") {
     const content = msg.content || "";
 
@@ -87,7 +96,7 @@ function GamePage() {
       localStorage.setItem("drawerName", newDrawerName);
       const isNewDrawer = newDrawerName.toLowerCase() === playerName.toLowerCase();
       setShowStartRound(isNewDrawer);
-      setIsDrawer(false); // Reset drawer state until round starts
+      setIsDrawer(false);
       setCurrentWord("");
     }
 
@@ -119,7 +128,16 @@ function GamePage() {
     }
   }
 
-  // Add message to chat (filter out word reveals)
+  // ✅ FIX: Handle JOIN messages properly
+  if (msg.type === "JOIN" || msg.type === "LEAVE") {
+    console.log("👥 Join/Leave message detected:", msg);
+    // Add join/leave messages directly to chat
+    setChatMessages((prev) => [...prev, msg]);
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  // Handle CHAT and other SYSTEM messages
   if (msg.type === "CHAT" || msg.type === "SYSTEM") {
     // Filter out messages that might reveal the word
     if (msg.content && typeof msg.content === "string") {
@@ -127,10 +145,11 @@ function GamePage() {
       if (lowerContent.includes("guessed the word") || 
           lowerContent.includes("word is") ||
           lowerContent.includes("correct word")) {
-        return; // Don't show messages that reveal the word
+        return;
       }
     }
     
+    console.log("💬 Adding message to chat:", msg);
     setChatMessages((prev) => [...prev, msg]);
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }

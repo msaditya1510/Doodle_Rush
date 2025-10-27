@@ -17,6 +17,8 @@ import com.rush.doodle.WebSocket.ChatType;
 import com.rush.doodle.exceptions.*;
 import com.rush.doodle.room.*;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PlayerService {
 	@Autowired 
@@ -72,7 +74,7 @@ public class PlayerService {
 		chatMessage.setName(name);
 		chatMessage.setType(ChatType.JOIN);
 		chatMessage.setContent(name+" joined the room!");
-		messagingTemplate.convertAndSend("/topic/room/"+roomId, chatMessage);
+		messagingTemplate.convertAndSend("/topic/room/"+room.getRoomId(), chatMessage);
 		if (room.getHost().equals(player)) {
 		    return ResponseEntity.status(HttpStatus.OK)
 		            .body(player.getName() + " joined as HOST!");
@@ -82,41 +84,48 @@ public class PlayerService {
 		}
 	}
 
+	@Transactional
 	public void deletePlayer(String name) {
 	    Optional<Player> playerOpt = playerRepository.findByName(name);
 
 	    if (playerOpt.isPresent()) {
 	        Player player = playerOpt.get();
 	        Room room = player.getRoom();
-
-	        // Remove player from room
-	        room.removePlayer(player);
-	        playerRepository.deleteById(player.getPlayerId());
 	        ChatMessage message = new ChatMessage();
 
-	        // Handle host reassignment
-	        if (room.getHost().equals(player)) {
+	        // Check if player is host BEFORE deleting
+	        boolean wasHost = room.getHost() != null && room.getHost().equals(player);
+
+	        // Remove player from room first
+	        room.removePlayer(player);
+
+	        // Handle host reassignment BEFORE deleting player
+	        if (wasHost) {
 	            if (!room.getPlayers().isEmpty()) {
 	                Player newHost = room.getPlayers().get(0); // pick first
 	                room.setHost(newHost);
 
-	                message.setAll("Player " + player.getName() + " removed due to inactivity. " +newHost.getName() + " is now the host.",
-	                    "System",ChatType.SYSTEM);
-	                messagingTemplate.convertAndSend("/topic/room/" + room.getRoomId(), message);
-	            }
-	         else {
+	                message.setAll("Player " + player.getName() + " left the game. " + newHost.getName() + " is now the host.",
+	                    "System", ChatType.SYSTEM);
+	            } else {
 	                // No players left → delete room
 	                roomRepository.delete(room);
+	                playerRepository.deleteById(player.getPlayerId()); // Delete player after room decision
 	                return;
 	            }
-	        } 
-	        else {
+	        } else {
 	            // Normal removal (not host)
-	            message.setAll("Player " + player.getName() + " removed due to inactivity!","System",ChatType.SYSTEM);
-	            messagingTemplate.convertAndSend("/topic/room/" + room.getRoomId(), message);
+	            message.setAll("Player " + player.getName() + " left the game", "System", ChatType.LEAVE);
 	        }
-	        roomRepository.save(room); // save changes (new host or updated players)
+
+	        // Send the message
+	        messagingTemplate.convertAndSend("/topic/room/" + room.getRoomId(), message);
+
+	        // Save room changes
+	        roomRepository.save(room);
+
+	        // Delete player LAST
+	        playerRepository.deleteById(player.getPlayerId());
 	    }
 	}
-
 }
