@@ -94,5 +94,3 @@ Doodle Rush successfully demonstrates how real-time interactive games can be bui
 
 Let the doodling begin! 🖌️🎉
 ```
-
-This README is structured to be clear, engaging, and informative — perfect for GitHub or any project hosting platform. Let me know if you'd like a version for a specific platform or if you want to add badges, screenshots, or a demo link!
